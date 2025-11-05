@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<a href="/">Home</a> |
+<a href="/poly/url0">URL0</a> |
+<a href="/poly/url1">URL1</a> |
+<a href="/poly/url2">URL2</a> |
+<a href="/poly/url3">URL3</a> |
+<a href="/poly/url4">URL4</a> |
+<hr>
+
+<h1>Page: <b th:text="${message}"></b></h1>
+
+<div th:insert="user-info :: userInfo"></div>
+</body>
+</html>
