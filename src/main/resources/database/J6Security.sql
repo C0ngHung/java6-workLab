@@ -21,7 +21,7 @@ INSERT INTO Users VALUES ('user@gmail.com', '{noop}123', 1);
 INSERT INTO Users VALUES ('admin@gmail.com', '{noop}123', 1);
 INSERT INTO Users VALUES ('both@gmail.com', '{noop}123', 1);
 
-INSERT INTO Authorities VALUES ('user@gmail.com', 'ROLE_USER');
-INSERT INTO Authorities VALUES ('admin@gmail.com', 'ROLE_ADMIN');
-INSERT INTO Authorities VALUES ('both@gmail.com', 'ROLE_USER');
-INSERT INTO Authorities VALUES ('both@gmail.com', 'ROLE_ADMIN');
+INSERT INTO Authorities (Username, Authority) VALUES ('user@gmail.com', 'ROLE_USER');
+INSERT INTO Authorities (Username, Authority) VALUES ('admin@gmail.com', 'ROLE_ADMIN');
+INSERT INTO Authorities (Username, Authority) VALUES ('both@gmail.com', 'ROLE_USER');
+INSERT INTO Authorities (Username, Authority) VALUES ('both@gmail.com', 'ROLE_ADMIN');

@@ -13,7 +13,10 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.factory.PasswordEncoderFactories;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.provisioning.InMemoryUserDetailsManager;
+import org.springframework.security.provisioning.JdbcUserDetailsManager;
 import org.springframework.security.web.SecurityFilterChain;
+
+import javax.sql.DataSource;
 
 @Configuration
 @EnableMethodSecurity(prePostEnabled = true)
@@ -36,17 +39,8 @@ public class SecurityConfig {
     }
 
     @Bean
-    public UserDetailsService userDetailsService(PasswordEncoder pe) {
-        String password = pe.encode("123");
-
-        UserDetails user1 = User.withUsername("user1").password(password).roles("USER").build();
-        UserDetails user2 = User.withUsername("user2").password(password).roles("USER").build();
-        UserDetails user3 = User.withUsername("user3").password(password).roles("USER").build();
-        UserDetails user4 = User.withUsername("user@gmail.com").password(password).roles("USER").build();
-        UserDetails user5 = User.withUsername("admin@gmail.com").password(password).roles("ADMIN").build();
-        UserDetails user6 = User.withUsername("both@gmail.com").password(password).roles("USER", "ADMIN").build();
-
-        return new InMemoryUserDetailsManager(user1, user2, user3, user4, user5, user6);
+    public UserDetailsService userDetailsService(DataSource dataSource) {
+        return new JdbcUserDetailsManager(dataSource);
     }
 
     @Bean
