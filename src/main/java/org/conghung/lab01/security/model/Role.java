@@ -7,6 +7,7 @@ import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import lombok.Getter;
 import lombok.Setter;
+import org.hibernate.annotations.Nationalized;
 
 import java.util.LinkedHashSet;
 import java.util.Set;
@@ -14,19 +15,17 @@ import java.util.Set;
 @Getter
 @Setter
 @Entity
-@Table(name = "Users")
-public class User {
+@Table(name = "Roles")
+public class Role {
     @Id
-    @Column(name = "Username", nullable = false, length = 50)
-    private String username;
+    @Column(name = "Id", nullable = false, length = 50)
+    private String id;
 
-    @Column(name = "Password", nullable = false, length = 500)
-    private String password;
+    @Nationalized
+    @Column(name = "Name", length = 50)
+    private String name;
 
-    @Column(name = "Enabled", nullable = false)
-    private Boolean enabled = false;
-
-    @OneToMany(mappedBy = "user")
+    @OneToMany(mappedBy = "role")
     private Set<UserRole> userRoles = new LinkedHashSet<>();
 
 }
