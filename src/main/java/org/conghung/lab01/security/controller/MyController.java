@@ -25,6 +25,7 @@ public class MyController {
         return "page";
     }
 
+    @PreAuthorize("isAuthenticated()")
     @RequestMapping("/poly/url1")
     public String method1(Model model) {
         logAuthentication();

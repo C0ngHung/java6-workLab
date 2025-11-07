@@ -4,7 +4,6 @@ spring:
 
   datasource:
     driver-class-name: com.microsoft.sqlserver.jdbc.SQLServerDriver
-#    url: jdbc:sqlserver://localhost:1433;databaseName=J6Security;encrypt=true;trustServerCertificate=true
     url: jdbc:sqlserver://localhost:1433;databaseName=J6Security2;encrypt=true;trustServerCertificate=true
     username: sa
     password: songlong
@@ -13,9 +12,19 @@ spring:
     hibernate:
       ddl-auto: none
       naming:
-        physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl # Giữ nguyên tên bảng và cột như trong database
-
+        physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
     properties:
       hibernate:
         dialect: org.hibernate.dialect.SQLServerDialect
     show-sql: true
+
+  security:
+    oauth2:
+      client:
+        registration:
+          google:
+            client-id: ${GOOGLE_CLIENT_ID}
+            client-secret: ${GOOGLE_CLIENT_SECRET}
+            scope:
+              - email
+              - profile
