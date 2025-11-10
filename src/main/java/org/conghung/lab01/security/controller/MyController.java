@@ -56,6 +56,12 @@ public class MyController {
         return "page";
     }
 
+    @RequestMapping("/student-crud")
+    public String studentCrud(Model model) {
+        logAuthentication();
+        return "student-crud";
+    }
+
     private void logAuthentication() {
         var authentication = SecurityContextHolder.getContext().getAuthentication();
         if (authentication == null) {

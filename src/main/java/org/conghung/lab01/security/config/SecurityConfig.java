@@ -38,7 +38,8 @@ public class SecurityConfig {
             "/js/**",
             "/images/**",
             "/webjars/**",
-            "/favicon.ico"
+            "/favicon.ico",
+            "/student-crud"
     };
 
     private static final String REMEMBER_ME_KEY = "lab01-remember-me-secret-key-2024-change-in-production";
@@ -53,7 +54,7 @@ public class SecurityConfig {
             throws Exception {
 
         http.authorizeHttpRequests(auth -> {
-//            auth.requestMatchers(AUTH_WHITELIST).permitAll();
+            auth.requestMatchers(AUTH_WHITELIST).permitAll();
             auth.anyRequest().authenticated();
         });
 
