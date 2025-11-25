@@ -1,5 +1,6 @@
 package org.conghung.lab01.security.service;
 
+/*
 import lombok.RequiredArgsConstructor;
 import org.conghung.lab01.security.dao.UserDAO;
 import org.conghung.lab01.security.model.User;
@@ -33,3 +34,4 @@ public class DaoUserDetailsManager implements UserDetailsService {
     }
 
 }
+*/

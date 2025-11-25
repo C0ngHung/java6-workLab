@@ -1,5 +1,6 @@
 package org.conghung.lab01.security.model;
 
+/*
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
@@ -29,3 +30,4 @@ public class Role {
     private Set<UserRole> userRoles = new LinkedHashSet<>();
 
 }
+*/

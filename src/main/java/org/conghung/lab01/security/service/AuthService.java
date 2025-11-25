@@ -1,5 +1,6 @@
 package org.conghung.lab01.security.service;
 
+/*
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
@@ -34,3 +35,4 @@ public class AuthService {
         return Stream.of(roleToCheck).anyMatch(grantedRoles::contains);
     }
 }
+*/

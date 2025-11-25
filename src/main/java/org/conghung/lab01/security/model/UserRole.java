@@ -1,5 +1,6 @@
 package org.conghung.lab01.security.model;
 
+/*
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
@@ -35,3 +36,4 @@ public class UserRole {
     private Role role;
 
 }
+*/
