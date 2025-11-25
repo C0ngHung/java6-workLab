@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Lab6 - Lesson 5 - Axios Demo</title>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <style>
+        body { font-family: sans-serif; padding: 20px; }
+        button { margin: 5px; padding: 8px 15px; cursor: pointer; }
+        #output { margin-top: 20px; padding: 10px; border: 1px solid #ccc; background: #f9f9f9; min-height: 100px; white-space: pre-wrap; }
+        .error { color: red; }
+        .success { color: green; }
+    </style>
+</head>
+<body>
+    <h1>Lab 01 - Axios Authentication Demo</h1>
+    
+    <div>
+        <h3>1. Login</h3>
+        <input type="text" id="username" value="user@gmail.com" placeholder="Username">
+        <input type="password" id="password" value="123" placeholder="Password">
+        <button onclick="login()">Login</button>
+    </div>
+
+    <div>
+        <h3>2. Test URLs</h3>
+        <button onclick="gotoUrl0()">/poly/url0 (Public)</button>
+        <button onclick="gotoUrl1()">/poly/url1 (Authenticated)</button>
+        <button onclick="gotoUrl2()">/poly/url2 (User)</button>
+        <button onclick="gotoUrl3()">/poly/url3 (Admin)</button>
+        <button onclick="gotoUrl4()">/poly/url4 (User/Admin)</button>
+    </div>
+
+    <h3>Output:</h3>
+    <div id="output"></div>
+
+    <script>
+        let token = null;
+
+        function log(message, type = 'normal') {
+            const output = document.getElementById('output');
+            const timestamp = new Date().toLocaleTimeString();
+            let color = 'black';
+            if (type === 'error') color = 'red';
+            if (type === 'success') color = 'green';
+            
+            output.innerHTML += `<div style="color: ${color}">[${timestamp}] ${message}</div>`;
+            output.scrollTop = output.scrollHeight;
+            console.log(message);
+        }
+
+        function login() {
+            var url = "http://localhost:8080/poly/login";
+            var data = {
+                "username": document.getElementById('username').value,
+                "password": document.getElementById('password').value
+            }
+            
+            log(`Logging in as ${data.username}...`);
+            
+            axios.post(url, data).then(resp => {
+                // Điều chỉnh để lấy token từ cấu trúc ApiResponse mới
+                // resp.data = { success: true, data: { token: "..." }, ... }
+                if (resp.data.success) {
+                    token = resp.data.data.token;
+                    log("Login success! Token received.", 'success');
+                    log("Token: " + token.substring(0, 20) + "...");
+                } else {
+                    log("Login failed: " + resp.data.message, 'error');
+                }
+            }).catch(error => {
+                log("Login error: " + (error.response?.data?.message || error.message), 'error');
+            })
+        }
+
+        function callApi(endpoint) {
+            var url = `http://localhost:8080${endpoint}`;
+            var config = {};
+            
+            if (token) {
+                config.headers = {
+                    "Authorization": `Bearer ${token}`
+                };
+            }
+
+            log(`Calling GET ${endpoint}...`);
+
+            axios.get(url, config).then(resp => {
+                log(`Success: ${JSON.stringify(resp.data)}`, 'success');
+            }).catch(error => {
+                let msg = error.message;
+                if (error.response && error.response.data) {
+                    msg = JSON.stringify(error.response.data);
+                }
+                log(`Error: ${msg}`, 'error');
+            })
+        }
+
+        function gotoUrl0() { callApi('/poly/url0'); }
+        function gotoUrl1() { callApi('/poly/url1'); }
+        function gotoUrl2() { callApi('/poly/url2'); }
+        function gotoUrl3() { callApi('/poly/url3'); }
+        function gotoUrl4() { callApi('/poly/url4'); }
+    </script>
+</body>
+</html>
