@@ -1,11 +1,15 @@
 package org.conghung.lab01.dto.request;
 
 import jakarta.validation.constraints.NotBlank;
+import lombok.Getter;
+import lombok.Setter;
 
-public record LoginRequest(
+@Setter
+@Getter
+public class LoginRequest {
     @NotBlank(message = "Username is required")
-    String username,
+    private String username;
 
     @NotBlank(message = "Password is required")
-    String password
-) {}
+    private String password;
+}
